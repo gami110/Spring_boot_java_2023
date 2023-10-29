@@ -15,25 +15,40 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request {
-    @NotBlank(message = "Uid is required")
-    @Size(max=32, message = "Uid cannot exceed 32 characters")
+
+    @NotBlank(message = "Поле uid не заполнено")
+    @Size(min = 1, max=32, message = "Поле uid содержит некорректное количество вне диапазона от 1 до 32")
     private String uid;
 
-    @NotBlank(message = "OperationUid is required")
-    @Size(max = 32, message = "OperationUid cannot exceed 32 characters")
+    @NotBlank(message = "Поле operationalUid не заполнено")
+    @Size(min = 1, max = 32, message = "Поле operationalUid содержит некорректное количество вне диапазона от 1 до 32")
     private String operationUid;
 
-    private String systemName;
+    private System systemName;
 
-    //@NotBlank(message = "SystemTime is required")
+    @NotBlank(message = "Поле systemTime не заполнено")
     private String systemTime;
 
     private String source;
 
-    @Min(value = 1, message = "CommunicationId must be at least 1")
-    @Max(value = 100000, message = "CommunicationId cannot exceed 100000")
+    @Max(value = 100000, message = "Превышено максимальное значение поля communicationId равное 100000")
+    @Min(value = 1, message = "Значение поля communicationId меньше минимального равного 1")
     private int communicationId;
+
     private int templateId;
     private int productCode;
     private int smsCode;
+    public String toString() {
+        return "{" +
+                "uid='" + uid + '\'' +
+                ", operationUid='" + operationUid + '\'' +
+                ", systemName='" + systemName + '\'' +
+                ", systemTime='" + systemTime + '\'' +
+                ", operationUid='" + source + '\'' +
+                ", source='" + communicationId +
+                ", templateId='" + templateId +
+                ", productCode='" + productCode +
+                ", smsCode='" + smsCode +
+                '}';
+    }
 }
